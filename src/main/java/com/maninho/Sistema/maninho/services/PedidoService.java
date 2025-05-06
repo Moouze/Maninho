@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -54,6 +55,8 @@ public class PedidoService {
         pedido.setItens(itens);
 
         pedido = pedidoRepository.save(pedido);
+        pedido.setDataCriacao(LocalDate.now());
+        pedido.setDataVencimento(dto.getDataVencimento());
 
         PedidoResponseDTO response = new PedidoResponseDTO();
         response.setId(pedido.getId());
@@ -82,6 +85,9 @@ public class PedidoService {
         }).toList());
 
         response.setValorTotal(pedido.getTotal());
+        response.setDataVencimento(pedido.getDataVencimento());
+        response.setDataPedido(pedido.getDataCriacao());
+
 
         return response;
     }

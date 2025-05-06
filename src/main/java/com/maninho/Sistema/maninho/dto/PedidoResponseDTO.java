@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -13,6 +14,8 @@ import java.util.List;
 public class PedidoResponseDTO {
 
     private Long id;
+    private LocalDate dataVencimento;
+    private LocalDate dataPedido;
     private String nomeCliente;
     private String documento1;
     private String documento2;
