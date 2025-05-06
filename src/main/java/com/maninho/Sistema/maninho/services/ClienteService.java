@@ -1,9 +1,6 @@
 package com.maninho.Sistema.maninho.services;
 
-import com.maninho.Sistema.maninho.dto.ClienteFisicoRequestDTO;
-import com.maninho.Sistema.maninho.dto.ClienteFisicoResponseDTO;
-import com.maninho.Sistema.maninho.dto.ClienteJuridicoRequestDTO;
-import com.maninho.Sistema.maninho.dto.ClienteJuridicoResponseDTO;
+import com.maninho.Sistema.maninho.dto.*;
 import com.maninho.Sistema.maninho.enums.TipoPessoa;
 import com.maninho.Sistema.maninho.model.Cliente;
 import com.maninho.Sistema.maninho.repositories.ClienteRepository;
@@ -101,4 +98,13 @@ public class ClienteService {
         return ClienteJuridicoResponseDTO.fromEntity(clienteExistente);
     }
 
+    public List<ClienteAutoCompleteDTO> buscarPorNome(String nome) {
+        List<Cliente> clientes = clienteRepository.findByNomeContainingIgnoreCase(nome);
+        return clientes.stream().map(cliente -> {
+            ClienteAutoCompleteDTO dto = new ClienteAutoCompleteDTO();
+            dto.setId(cliente.getId());
+            dto.setNome(cliente.getNomeExibicao());
+            return dto;
+        }).toList();
+    }
 }

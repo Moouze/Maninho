@@ -21,11 +21,9 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private TipoPessoa tipoPessoa;
     private String nome;
-    @CPF
     private String cpf;
     private String rg;
     private String razaoSocial;
-    @CNPJ
     private String cnpj;
     private String ie;
     private String endereco;

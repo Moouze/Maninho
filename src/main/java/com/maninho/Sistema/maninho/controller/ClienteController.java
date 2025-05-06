@@ -1,8 +1,5 @@
 package com.maninho.Sistema.maninho.controller;
-import com.maninho.Sistema.maninho.dto.ClienteFisicoRequestDTO;
-import com.maninho.Sistema.maninho.dto.ClienteFisicoResponseDTO;
-import com.maninho.Sistema.maninho.dto.ClienteJuridicoRequestDTO;
-import com.maninho.Sistema.maninho.dto.ClienteJuridicoResponseDTO;
+import com.maninho.Sistema.maninho.dto.*;
 import com.maninho.Sistema.maninho.services.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +46,10 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping("/autocomplete")
+    public List<ClienteAutoCompleteDTO> autocomplete(@RequestParam String nome) {
+        return clienteService.buscarPorNome(nome);
+    }
 
 
 }
